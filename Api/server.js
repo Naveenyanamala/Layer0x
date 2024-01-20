@@ -32,13 +32,23 @@ server.addService(chainService.service, {
         const response=[];
         const Promises = _blocks.map(async (block) => {
             const latest_block_height = await getLatestBlockHeight(block.rpcUrl);
-            const _Status = {name:block.name,
-            Status:'active', 
-            height:latest_block_height
-             };
-             //const result ={statusList: stat};
-            response.push(_Status);
-            
+            if(latest_block_height){
+              const _Status = {name:block.name,
+                Status:'active', 
+                height:latest_block_height
+                 };
+                 //const result ={statusList: stat};
+                response.push(_Status);
+                
+            }else{
+              const _Status = {name:block.name,
+                Status:'inactive', 
+                height:0
+                 };
+                 //const result ={statusList: stat};
+                response.push(_Status);
+                
+            }
         });
         await Promise.all(Promises);
         const result = {statusList:response};
@@ -53,10 +63,10 @@ server.addService(chainService.service, {
               if (response.data) {
                 return  response.data.result.sync_info.latest_block_height;
               } else {
-                throw new Error('Failed to fetch latest block height');
+                return 0;
               }
             } catch (error) {
-              throw new Error(`Error fetching latest block height: ${error.message}`);
+              return 0;
             }
           }
     },
