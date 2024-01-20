@@ -43,23 +43,23 @@ def calculate_grades(data):
         student_name = student["name"]
         grades = [grade["grade"] for grade in student["grades"]]
 
-        # Calculate average grade per student
+
         average_grades_per_student[student_name] = sum(grades) / len(grades)
 
-        # Update the list of all grades for overall calculations
+        
         all_grades.extend(grades)
 
-        # Calculate average grade per subject
+        
         for subject_grade in student["grades"]:
             subject = subject_grade["subject"]
             grade = subject_grade["grade"]
 
             average_grades_per_subject[subject].append(grade)
 
-    # Calculate overall average grade
+    
     overall_average_grade = sum(all_grades) / len(all_grades)
 
-    # Calculate standard deviation of grades using math module
+   
     grades_mean = sum(all_grades) / len(all_grades)
     squared_diff = sum((grade - grades_mean) ** 2 for grade in all_grades)
     grades_std_deviation = math.sqrt(squared_diff / len(all_grades))
@@ -71,6 +71,5 @@ def calculate_grades(data):
         "std_deviation": grades_std_deviation,
     }
 
-# Calculate metrics and print the results
 results = calculate_grades(studentsData)
 print("Output:", results)
