@@ -25,11 +25,16 @@ https://github.com/Naveenyanamala/Layer0x/assets/135339002/bf8cf15a-ef48-42ba-bc
 
 # Task : Basic API Development & Deployment
 
-### Tech Stack
+## Tech Stack
 #### Client : gRPC with Nodejs
 #### Server :  gRPC with Nodejs,Express
 #### Database:  Mongodb
 
-### Run Locally
+## Run Locally
 
+Clone the Project 
+
+```bash
+
+```
 
