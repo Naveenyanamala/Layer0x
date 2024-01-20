@@ -7,12 +7,12 @@ class Challenge{
 		int start = 0, end = 1;
 		int low, hi;
 
-		// Traverse the input string
 		for (int i = 0; i < n; i++) {
 
 			low = i - 1;
 			hi = i;
-
+			// 0 1 2 3 4
+			// g e e k s
 			while (low >= 0 && hi < n && s.charAt(low) == s.charAt(hi)) {
 				if (hi - low + 1 > end) {
 					start = low;
@@ -25,6 +25,8 @@ class Challenge{
 			low = i - 1;
 			hi = i + 1;
 
+			// 0 1 2 3 4s 
+			// g e s k s
 			while (low >= 0 && hi < n && s.charAt(low) == s.charAt(hi)) {
 				if (hi - low + 1 > end) {
 					start = low;
@@ -35,17 +37,21 @@ class Challenge{
 			}
 		}
 
-		// Return output Substring
+		
 		return s.substring(start, start+end);
 	}
 
-	// Driver code
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		System.out.println("Enter the string: ");
-		String string =input.next();
-		// String s = "forgeeksskeegfor";  
-        //String s = "geeks";
-		System.out.println("Longest palindrome substring is:"+longestPalSubstr(string));
+		System.out.println("Enter no of test cases");
+        int t = input.nextInt();
+		while (t-- >0) {
+			System.out.println("Enter the string: ");
+			String string =input.next();
+			// String s = "forgeeksskeegfor";  
+        	//String s = "geeks";
+			System.out.println("Longest palindrome substring is:"+longestPalSubstr(string));
+		}
+		
 	}
 }
