@@ -35,6 +35,37 @@ https://github.com/Naveenyanamala/Layer0x/assets/135339002/bf8cf15a-ef48-42ba-bc
 Clone the Project 
 
 ```bash
-
+ git clone https://github.com/Naveenyanamala/Layer0x.git
 ```
+
+Go to the project Api folder 
+
+```bash
+  cd Api
+```
+
+Install Dependencies
+
+```bash
+  npm install
+```
+## Split the terminal two pannels
+
+To Start the Server
+
+```bash
+  node server.js
+  or
+  npm run server
+```
+
+To Start the client
+
+```bash
+  node client.js
+   or
+  npm run client
+```
+
+
 
