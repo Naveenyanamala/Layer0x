@@ -20,4 +20,4 @@ Challenge 3: (Calculate Average and Deviation of JSON Objects with Subjects)
 https://github.com/Naveenyanamala/Layer0x/assets/135339002/bf8cf15a-ef48-42ba-bc14-44a34634d35a
 
 
-![IDLE (Python 3 11) 1_20_2024 3_13_22 PM](https://github.com/Naveenyanamala/Layer0x/assets/135339002/38be67e7-c8b2-4c10-b742-d7c0294ee3f2)
+![Screenshot (51)](https://github.com/Naveenyanamala/Layer0x/assets/135339002/820fe75c-506a-4ff5-8f97-2d55d4ecf196)
