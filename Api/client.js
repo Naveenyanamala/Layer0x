@@ -23,37 +23,80 @@ app.use(express.json());
 
 const client = new chainService("localhost:50051", grpc.credentials.createInsecure());
 
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout,
-//   });
-  
-//   rl.question("Enter block name: ", (name) => {
-//     rl.question("Enter chainId: ", (chainId) => {
-//       rl.question("Enter apiUrl: ",(apiUrl) =>{
-//         rl.question("Enter rpcUrl:",(rpcUrl) => {
-//             const blockData = {
-//                 name,
-//                 chainId: chainId ,
-//                 apiUrl: apiUrl, // Set height to 0 as it will be calculated on the server side
-//                 rpcUrl: rpcUrl,
-//               };
-              
-//               client.createchain(blockData, (error, blockchain) => {
-//                 if (error) {
-//                   console.log(error);
-//                 } else {
-//                   console.log("Successfully created one block");
-//                   console.log(blockchain);
-//                 }
-              
-//             rl.close();
-//         });
-//       });  
-//       });
-//     });
-//   });
 
+// enter through command line
+app.get('/Api/create',async (req,res)=>{
+
+    try {
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout,
+          });
+          
+          rl.question("Enter block name: ", (name) => {
+            rl.question("Enter chainId: ", (chainId) => {
+              rl.question("Enter apiUrl: ",(apiUrl) =>{
+                rl.question("Enter rpcUrl:",(rpcUrl) => {
+                    const blockData = {
+                        name,
+                        chainId: chainId ,
+                        apiUrl: apiUrl, // Set height to 0 as it will be calculated on the server side
+                        rpcUrl: rpcUrl,
+                      };
+                      
+                      client.createchain(blockData, (error, blockchain) => {
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log("Successfully created one block");
+                          console.log(blockchain);
+                        }
+                      
+                    rl.close();
+                });
+              });  
+              });
+            });
+          });
+
+    } catch (error) {
+        res.status(500).json({success:false,error:error.message});
+    }
+
+});
+
+// through postman
+
+// app.post('/Api/create', async (req, res) => {
+//     try {
+//       const { name, chainId, apiUrl, rpcUrl } = req.body;
+  
+//       if (!name || !chainId || !apiUrl || !rpcUrl) {
+//         return res.status(400).json({ success: false, error: 'Missing required fields' });
+//       }
+  
+//       const blockData = {
+//         name,
+//         chainId,
+//         apiUrl,
+//         rpcUrl,
+//       };
+  
+//       client.createchain(blockData, (error, blockchain) => {
+//         if (error) {
+//           console.log(error);
+//           res.status(500).json({ success: false, error: error.message });
+//         } else {
+//           console.log("Successfully created one block");
+//           console.log(blockchain);
+//           res.status(200).json({ success: true, blockchain });
+//         }
+//       });
+//     } catch (error) {
+//       console.log(error);
+//       res.status(500).json({ success: false, error: error.message });
+//     }
+//   });
 
 
 
@@ -94,15 +137,15 @@ app.get('/Api/chains',async (req,res) => {
     }
 });
 
-
-app.get('/Api/create',async (req,res) =>{
+// for the non api or to check 
+app.get('/Api/createfalse',async (req,res) =>{
     try {
         client.createchain(
             {
                 name:"omniflix false",
                 chainId:"devnet1",
                 apiUrl:"https://api.devnet-alpha.omniflix.network",
-                rpcUrl:"https://rpc.devnet-alpha.omniflix.network",
+                rpcUrl:"https://rpc.network",
             },(error,response) =>{
                 if(error){
                     res.status(500).json({success:false,error:error.message});
@@ -146,11 +189,14 @@ app.use('/Api/update',async (req,res)=> {
 })
 
 
+// directly given name
+// if we want to give nanme required uncomment second
 app.get('/Api/delete',async (req,res)=> {
     try{
         client.delete(
             {
                 name:'omniflix false',
+                // name :req.name,
             },(error,response) =>{
                 if(error){
                     //console.error(err);
